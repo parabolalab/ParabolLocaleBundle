@@ -1,0 +1,29 @@
+<style>
+.form-model-field-translations .nav-tabs li {display: none;}
+</style>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$('.a2lix_translations .nav-tabs li').show()
+	$('.a2lix_translations .nav-tabs li:not(:first-child) a:not(:contains("*"))').parent().hide()
+	var countriesJsonMap = {{ countriesJsonMap | raw }}
+
+	$('.form-model-field-countries input:checked').each(function(){
+		$('.a2lix_translations .nav-tabs a[data-target$=-'+countriesJsonMap[$(this).val()]+']').parent().show()
+	})
+
+	$('.form-model-field-countries input').on('ifChanged', function(event){
+		// console.log();
+		if($('.a2lix_translations .nav-tabs a[data-target$=-'+countriesJsonMap[$(this).val()]+']').not(':contains("*")').length)
+		{
+			if($(this).is(':checked')) $('.a2lix_translations .nav-tabs a[data-target$=-'+countriesJsonMap[$(this).val()]+']').parent().show()
+			else $('.a2lix_translations .nav-tabs a[data-target$=-'+countriesJsonMap[$(this).val()]+']').parent().hide()
+		}
+			
+			
+	})
+})
+
+</script>

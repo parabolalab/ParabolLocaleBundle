@@ -1,0 +1,7 @@
+{% use "bootstrap_3_layout.html.twig" %}
+
+{% block country_entity_widget %}
+    {{ block('choice_widget_expanded') }}
+    {{ render(controller('ParabolLocaleBundle:Country:TranslationsEnabler')) }}
+{% endblock country_entity_widget %}
+

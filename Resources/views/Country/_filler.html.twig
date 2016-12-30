@@ -1,0 +1,29 @@
+<script type="text/javascript">
+    	$(document).ready(function(){
+    		$('.form-model-field-code select').change(function(){
+    			var url = '{{ path('Parabol_LocaleAdminBundle_Country_country_info', {code: ':code:'}) }}'
+    			var preid = 'countryInfoPreloader'
+    			$(this).closest('.box').append('<div id="'+preid+'" class="overlay"><i class="fa fa-circle-o-notch fa-spin"></i></div>')
+    			$.get(url.replace(':code:', $(this).val()), function(jdata){
+    				$('#' + preid).remove();
+    				$('.form-model-field-name input').val(jdata.name);
+    				$('.form-model-field-currency input').val(jdata.currencies[0]);
+    				$('.form-model-field-dialingCode input').val('+' + jdata.callingCodes[0]);
+    				$('.form-model-field-nativeCode input').val(jdata.languages[0]);
+    				$('.form-model-field-locales input').iCheck('uncheck')
+    				checked = 0;
+    				for (var i in jdata.languages)
+    				{
+    					if($('.form-model-field-locales input[value="'+jdata.languages[i]+'"]').length)
+    					{
+    						checked++
+    						$('.form-model-field-locales input[value="'+jdata.languages[i]+'"]').iCheck('check');
+    					}
+    				}
+
+    				if(!checked) $('.form-model-field-locales > div > div > div:first-child input').iCheck('check')
+
+    			}, 'json')
+    		})
+    	})
+</script>

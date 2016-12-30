@@ -1,0 +1,11 @@
+parameters:
+    contact_form.title: 'Wiadomość z formularza kontaktowego'
+    contact_form.email: dev@parabolalab.com
+    google.view_id: 
+    google.tracking_id: 
+    google.domain_name: 
+    google_api.user: 304925681810-uv7u7l6hclo7fcndc8dbt9esgju3dfi2@developer.gserviceaccount.com
+    google.site_verification_filename: 
+    portal.email_from: ParabolaLab
+    portal.email: dev@parabolalab.com
+    portal.name: CMS2

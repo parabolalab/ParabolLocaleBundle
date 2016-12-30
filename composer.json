@@ -1,0 +1,23 @@
+{
+    "name": "parabol/parabol-locale-bundle",
+    "type": "symfony-bundle",
+    "minimum-stability": "stable",
+    "description": "Locales base on database to manage by some cms.",
+    "keywords": ["locales"],
+    "homepage": "https://github.com/parabolalab/ParabolLocaleBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marcin Kalota",
+            "email": "marcin@parabolalab.com",
+            "homepage": "http://www.parabolalab.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "autoload": {
+        "psr-0": { "Parabol\\LocaleBundle": "" }
+    },
+    "target-dir": "Parabol/LocaleBundle"
+}
