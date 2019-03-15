@@ -153,7 +153,7 @@ class LocaleSubscriber implements EventSubscriber {
 
             file_put_contents('../app/config/locales.yml', Yaml::dump(array('parameters' => $parameters)));
 
-            $containerCache = $this->container->getParameter('kernel.root_dir').'/cache/prod/appProdProjectContainer.php';
+            $containerCache = $this->container->getParameter('kernel.cache_dir').'/appProdProjectContainer.php';
             if(file_exists($containerCache)) unlink($containerCache);
             
             
