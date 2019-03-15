@@ -13,6 +13,8 @@ use Doctrine\ORM\EntityRepository;
 class LocaleRepository extends EntityRepository
 {
 	
+	use \Parabol\DoctrineBehaviorsBundle\Sortable\Entity\SortableRepository;
+
 	public function validateRequired($criteria)
 	{
 		if($criteria['isDefault'])
@@ -36,6 +38,11 @@ class LocaleRepository extends EntityRepository
 			return null;
 		}
 	}
+
+	public function sortOrder()
+  {
+      return 'desc'; // or desc
+  } 
 
 
 	public function validateEnabled($criteria)

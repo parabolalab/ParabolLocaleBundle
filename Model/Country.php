@@ -59,7 +59,7 @@ abstract class Country
     protected $nativeCode;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Locale", mappedBy="countries", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\App\LocaleBundle\Entity\Locale", mappedBy="countries", cascade={"persist"})
      * @Assert\Count(min=1);
      **/
     protected $locales;
@@ -210,11 +210,11 @@ abstract class Country
     /**
      * Add locale
      *
-     * @param \Parabol\LocaleBundle\Entity\Locale $locale
+     * @param \App\LocaleBundle\Entity\Locale $locale
      *
      * @return Country
      */
-    public function addLocale(\Parabol\LocaleBundle\Entity\Locale $locale)
+    public function addLocale(\App\LocaleBundle\Entity\Locale $locale)
     {
 
         $locale->addCountry($this);
@@ -227,9 +227,9 @@ abstract class Country
     /**
      * Remove locale
      *
-     * @param \Parabol\LocaleBundle\Entity\Locale $locale
+     * @param \App\LocaleBundle\Entity\Locale $locale
      */
-    public function removeLocale(\Parabol\LocaleBundle\Entity\Locale $locale)
+    public function removeLocale(\App\LocaleBundle\Entity\Locale $locale)
     {
         $locale->removeCountry($this);
         $this->locales->removeElement($locale);

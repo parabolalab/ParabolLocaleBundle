@@ -46,7 +46,7 @@ class LocaleSubscriber implements EventSubscriber {
 
     public function postUpdate(LifecycleEventArgs $arg)
     {
-        $this->rebuildLocales($arg);            
+        // $this->rebuildLocales($arg);            
     }
 
     public function postRemove(LifecycleEventArgs $arg)
@@ -57,7 +57,7 @@ class LocaleSubscriber implements EventSubscriber {
     public function setLocaleParams($arg)
     {
         $entity = $arg->getEntity();
-        if($entity instanceof \Parabol\LocaleBundle\Entity\Locale)
+        if($entity instanceof \App\LocaleBundle\Entity\Locale)
         {
             if($entity->isDefault())
             {
@@ -83,7 +83,7 @@ class LocaleSubscriber implements EventSubscriber {
     {   
         $entity = $arg->getEntity();
         
-        if($entity instanceof \Parabol\LocaleBundle\Entity\Country)
+        if($entity instanceof \App\LocaleBundle\Entity\Country)
         {
 
             // $countryInfo = json_decode(file_get_contents('https://restcountries.eu/rest/v1/alpha/' . $entity->getCode()));
@@ -103,22 +103,21 @@ class LocaleSubscriber implements EventSubscriber {
 
     public function rebuildLocales($arg)
     {
-        if($arg->getEntity() instanceof \Parabol\LocaleBundle\Entity\Locale)
+        if($arg->getEntity() instanceof \App\LocaleBundle\Entity\Locale)
         {
             
 
            
             $all = $arg->getObjectManager()
-                ->getRepository('ParabolLocaleBundle:Locale')
+                ->getRepository('AppLocaleBundle:Locale')
                 ->createQueryBuilder('l')
                 ->select('l.code, l.isRequired, l.isDefault')
-                ->orderBy("l.code")
                 ->where('l.isEnabled = 1')
-                ->orderBy('l.isRequired', 'DESC')
-                ->addOrderBy('l.code', 'ASC')
+                ->addOrderBy('l.sort', 'asc')
                 ->getQuery()
                 ->getScalarResult()
             ;
+
 
             $defaultLocale = $this->container->getParameter('parabol_locale.default_locale');  
 

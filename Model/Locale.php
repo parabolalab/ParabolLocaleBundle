@@ -5,6 +5,7 @@ namespace Parabol\LocaleBundle\Model;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Parabol\BaseBundle\Entity\Base\BaseEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -12,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(fields={"isDefault", "code"}, ignoreNull=true, repositoryMethod="validateRequired")
  * @UniqueEntity(fields={"isEnabled", "isDefault", "code"}, ignoreNull=true, repositoryMethod="validateEnabled", message="Default locale can't be disabled")
  */
-abstract class Locale
+abstract class Locale extends BaseEntity
 {
 
     /**
@@ -49,7 +50,7 @@ abstract class Locale
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Country", inversedBy="locales", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\App\LocaleBundle\Entity\Country", inversedBy="locales", cascade={"persist"})
      * @ORM\JoinTable(name="parabol_countries_locales", 
      *      joinColumns={@ORM\JoinColumn(name="locale_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="country_id", referencedColumnName="id")}
@@ -196,11 +197,11 @@ abstract class Locale
     /**
      * Add country
      *
-     * @param \Parabol\LocaleBundle\Entity\Country $country
+     * @param \App\LocaleBundle\Entity\Country $country
      *
      * @return Locale
      */
-    public function addCountry(\Parabol\LocaleBundle\Entity\Country $country)
+    public function addCountry(\App\LocaleBundle\Entity\Country $country)
     {
         $this->countries[] = $country;
 
@@ -210,9 +211,9 @@ abstract class Locale
     /**
      * Remove country
      *
-     * @param \Parabol\LocaleBundle\Entity\Country $country
+     * @param \App\LocaleBundle\Entity\Country $country
      */
-    public function removeCountry(\Parabol\LocaleBundle\Entity\Country $country)
+    public function removeCountry(\App\LocaleBundle\Entity\Country $country)
     {
         $this->countries->removeElement($country);
     }
